@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "Fire-Glove",
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"streambuf": "cpp"
+		}
+	}
+}
