@@ -10,6 +10,7 @@
             "includePath": [
                 "e:/4. Projecten/FireGlove/Fire-Glove/include",
                 "e:/4. Projecten/FireGlove/Fire-Glove/src",
+                "C:/Users/rgors/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src",
                 "C:/Users/rgors/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/config",
                 "C:/Users/rgors/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/app_trace",
                 "C:/Users/rgors/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/app_update",
@@ -91,7 +92,6 @@
                 "C:/Users/rgors/.platformio/packages/framework-arduinoespressif32/libraries/Ticker/src",
                 "C:/Users/rgors/.platformio/packages/framework-arduinoespressif32/libraries/Update/src",
                 "C:/Users/rgors/.platformio/packages/framework-arduinoespressif32/libraries/WebServer/src",
-                "C:/Users/rgors/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src",
                 "C:/Users/rgors/.platformio/packages/framework-arduinoespressif32/libraries/WiFiClientSecure/src",
                 "C:/Users/rgors/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
                 "C:/Users/rgors/.platformio/packages/tool-unity",
@@ -102,6 +102,7 @@
                 "path": [
                     "e:/4. Projecten/FireGlove/Fire-Glove/include",
                     "e:/4. Projecten/FireGlove/Fire-Glove/src",
+                    "C:/Users/rgors/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src",
                     "C:/Users/rgors/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/config",
                     "C:/Users/rgors/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/app_trace",
                     "C:/Users/rgors/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/app_update",
@@ -183,7 +184,6 @@
                     "C:/Users/rgors/.platformio/packages/framework-arduinoespressif32/libraries/Ticker/src",
                     "C:/Users/rgors/.platformio/packages/framework-arduinoespressif32/libraries/Update/src",
                     "C:/Users/rgors/.platformio/packages/framework-arduinoespressif32/libraries/WebServer/src",
-                    "C:/Users/rgors/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src",
                     "C:/Users/rgors/.platformio/packages/framework-arduinoespressif32/libraries/WiFiClientSecure/src",
                     "C:/Users/rgors/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
                     "C:/Users/rgors/.platformio/packages/tool-unity",

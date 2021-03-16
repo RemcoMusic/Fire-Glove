@@ -1,83 +1,67 @@
 #include <Arduino.h>
 #include "h/tasks.h"
 
-bool buttonState = false;
-bool previousButtonState = false;
-const unsigned long eventInterval = 10000;
-unsigned long previousTime = 0;
-bool shooting = false;
-int startupDelay = 2500;
-
 ReadInput ReadInputs;
 ShootFireball Ignition;
 
-    Tasks::Tasks()
-    {
-        xTaskCreate(
-            ReadInputTask,
-            "ReadInputs",
-            10000,
-            NULL,
-            1,
-            NULL);
+TaskHandle_t TaskHandle_Inputs;
+bool buttonState = false;
 
-        xTaskCreate(
-            ShootFireballTask,
-            "Fire",
-            10000,
-            NULL,
-            1,
-            NULL);
+Tasks::Tasks()
+{
+    xTaskCreate(
+        ReadInputTask,
+        "ReadInputs",
+        10000,
+        NULL,
+        1,
+        &TaskHandle_Inputs);
+
+    xTaskCreate(
+        ShootFireballTask,
+        "Fire",
+        10000,
+        NULL,
+        1,
+        NULL);
+}
+
+void Tasks::ReadInputTask(void * parameter)
+{
+    int startupDelay = 2500;
+    delay(startupDelay);
+
+    Serial.println("Reading inputs");
+    ReadInputs.start();
+
+    for(;;)
+    {         
+        buttonState = ReadInputs.readButton();
+            
+        vTaskDelay(10/portTICK_PERIOD_MS);
     }
+}
 
-    void Tasks::ReadInputTask(void * parameter)
+void Tasks::ShootFireballTask(void * parameter)
+{
+    Ignition.setup();
+    for(;;)
     {
-        delay(startupDelay);
-        Serial.println("Input started");
-        ReadInputs.start();
-        for(;;)
+        if(buttonState)
         {
-            //If statement does nothing? buttonState allready true            
-            if(ReadInputs.readButton())
+            vTaskSuspend(TaskHandle_Inputs);
+            if(fireData.currentMode == fireData.single)
             {
-                buttonState = true;
+                Serial.println("Fireball");
+                Ignition.shootFireball(1);
             }
-            else
+            else if(fireData.currentMode == fireData.burst)
             {
-                buttonState = false;
+                Serial.println("Burst");
+                Ignition.shootFireball(2); 
             }
-            vTaskDelay(10/portTICK_PERIOD_MS);
+            vTaskResume(TaskHandle_Inputs);
         }
+        vTaskDelay(10/portTICK_PERIOD_MS);
     }
-
-    void Tasks::ShootFireballTask(void * parameter)
-    {
-        Ignition.setup();
-        for(;;)
-        {
-            if(buttonState && (buttonState != previousButtonState))
-            {
-                if(fireData.currentMode == fireData.single)
-                {
-                    previousButtonState = buttonState;  
-                    Serial.println("Fireball");
-                    shooting = true;
-                    Ignition.shootFireball(1);
-                }
-                else if(fireData.currentMode == fireData.burst)
-                {
-                    previousButtonState = buttonState;  
-                    Serial.println("Burst");
-                    shooting = true;
-                    Ignition.shootFireball(2); 
-                }
-            }
-            else if(!buttonState && (buttonState != previousButtonState)) //Unnecessary since it should always be off
-            {
-                Serial.println("Idle");
-                previousButtonState = buttonState;
-                Ignition.idle();
-            }
-            vTaskDelay(10/portTICK_PERIOD_MS);
-        }
-    }
+}

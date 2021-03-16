@@ -11,7 +11,6 @@ void ShootFireball::setup()
 
 void ShootFireball::shootFireball(int amount)
 {   
-    //Maybe change delay to millis just an idea?
     for(int x = 0; x < amount;x++)
     {
       setIgnition(1);
@@ -25,55 +24,30 @@ void ShootFireball::shootFireball(int amount)
     }
 }
 
-void ShootFireball::ignite()
-{
-    setIgnition(1);
-    delay(fireData.ignitionDelay);
-    setValve(1);
-    delay(fireData.valveOpenTime);
-    setIgnition(0);
-}
-
-void ShootFireball::idle()
-{
-    if(ignitionState)
-    {
-      setIgnition(0);
-    }
-    if(valveState)
-    {
-      setValve(0);
-    }
-}
-
 void ShootFireball::setValve(int state)
 {
-  if(state == 1 && (!valveState))
+  if(state == 1)
   {
-    valveState = true;
-    digitalWrite(solenoid,HIGH);
+    digitalWrite(solenoid, HIGH);
     Serial.println("Valve open");
   }
-  else if(state == 0 && (valveState))
+  else if(state == 0)
   {
-    valveState = false;
-    digitalWrite(solenoid,LOW);
+    digitalWrite(solenoid, LOW);
     Serial.println("valve closed");
   }
 }
 
 void ShootFireball::setIgnition(int state)
 {
-  if(state == 1 && (!ignitionState))
+  if(state == 1)
   {
-    ignitionState = true;
-    digitalWrite(ignition,HIGH);
+    digitalWrite(ignition, HIGH);
     Serial.println("Ignition started!");
   }
-  else if(state == 0 && (ignitionState))
+  else if(state == 0)
   {
-    ignitionState = false;
-    digitalWrite(ignition,LOW);
+    digitalWrite(ignition, LOW);
     Serial.println("Ignition stopped!");
   }
 }

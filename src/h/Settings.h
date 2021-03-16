@@ -7,7 +7,7 @@ struct FireData {
     int delayAfterValve = 100;
     int delayBetweenShots = 500;
     float currentVoltage = 12.6;
-    bool fire = false;
+
     enum fireMode {
             single = 0,
             burst = 1,
