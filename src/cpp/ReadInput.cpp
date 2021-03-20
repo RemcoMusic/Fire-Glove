@@ -11,15 +11,19 @@ bool ReadInput::readButton()
   if(value == 0) //Button is pressed
   { 
     pressCounter++;
-    if(pressCounter > sensitivity) //Added counter to reduce bounceback
+    if((pressCounter > sensitivity) && continiousSafety) //Added counter to reduce bounceback
     {
         Serial.println("Button triggered");
         pressCounter = 0;
+        continiousSafety = false;
         return true;
+    } else {
+      return false;
     }
   }
   else //Button is not pressed
   {
+    continiousSafety = true;
     return false;
   }
 }

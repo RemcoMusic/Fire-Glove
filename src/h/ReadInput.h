@@ -10,8 +10,9 @@ class ReadInput
         bool readButton();
     private:
         float mapFloat(long x, long in_min, long in_max, long out_min, long out_max);
-        int button = 13; 
+        int button = 16; 
         int VoltagePin = 34; //D34
         int pressCounter = 0;
         int sensitivity = 5;
+        bool continiousSafety = false;
 };

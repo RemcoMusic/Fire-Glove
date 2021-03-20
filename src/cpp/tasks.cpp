@@ -28,12 +28,8 @@ Tasks::Tasks()
 
 void Tasks::ReadInputTask(void * parameter)
 {
-    int startupDelay = 2500;
-    delay(startupDelay);
-
     Serial.println("Reading inputs");
     ReadInputs.start();
-
     for(;;)
     {         
         buttonState = ReadInputs.readButton();
@@ -60,6 +56,7 @@ void Tasks::ShootFireballTask(void * parameter)
                 Serial.println("Burst");
                 Ignition.shootFireball(2); 
             }
+            buttonState = false;
             vTaskResume(TaskHandle_Inputs);
         }
         vTaskDelay(10/portTICK_PERIOD_MS);
